@@ -29,8 +29,9 @@ export interface ExaSearchParams {
 
 export interface Settings {
   EXA_API_KEY: string;
+  PLUGIN_API_KEY: string; // 添加插件API密钥
   EXA_SEARCH_TYPE?: 'keyword' | 'neural' | 'auto';
-  EXA_SEARCH_NUM_RESULTS?: number;
+  EXA_SEARCH_NUM_RESULTS?: string; 
   EXA_SEARCH_SUMMARY?: boolean;
   EXA_SEARCH_TEXT?: boolean;
 }

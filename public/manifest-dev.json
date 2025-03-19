@@ -26,12 +26,18 @@
   },
   "settings": {
     "type": "object",
-    "required": ["EXA_API_KEY"],
+    "required": ["EXA_API_KEY", "PLUGIN_API_KEY"],
     "properties": {
       "EXA_API_KEY": {
         "type": "string",
         "title": "Exa API Key",
         "description": "The API key to use the Exa Search API"
+      },
+      "PLUGIN_API_KEY": {
+        "type": "string",
+        "title": "插件访问密钥",
+        "description": "输入访问密钥以验证请求（必须与服务器配置匹配）",
+        "default": ""
       },
       "EXA_SEARCH_TYPE": {
         "type": "string",

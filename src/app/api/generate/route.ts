@@ -4,14 +4,41 @@ import {ExaSearchParams, ExaSearchResponse, Settings} from "@/type";
 import axios from "axios";
 
 const EXA_API_URL = 'https://api.exa.ai/search';
+// 从环境变量获取验证密钥
+const AUTH_KEY = process.env.PLUGIN_AUTH_KEY;
 
 export async function POST(req: NextRequest) {
 	try {
+		// 获取插件设置
 		let settings = getPluginSettingsFromRequest<Settings>(req);
 		if (!settings)
 			return createErrorResponse(PluginErrorType.PluginSettingsInvalid, {
 				message: 'Plugin settings not found.',
 			});
+
+		// 验证插件API密钥
+		const clientApiKey = settings.PLUGIN_API_KEY;
+		if (!clientApiKey) {
+			return createErrorResponse(PluginErrorType.PluginSettingsInvalid, {
+				message: '未提供插件API密钥。',
+			});
+		}
+		
+		// 检查环境变量中是否配置了验证密钥
+		if (!AUTH_KEY) {
+			console.error('服务器未配置环境变量PLUGIN_AUTH_KEY');
+			return NextResponse.json({
+				error: '服务器身份验证配置错误'
+			}, { status: 500 });
+		}
+		
+		// 检查客户端提供的密钥是否与环境变量中的匹配
+		if (clientApiKey !== AUTH_KEY) {
+			console.log('无效的API密钥：客户端密钥与服务器不匹配');
+			return NextResponse.json({
+				error: '无效的API密钥，身份验证失败'
+			}, { status: 401 });
+		}
 
 		const apiKey = settings.EXA_API_KEY;
 		if (!apiKey) {
@@ -33,7 +60,7 @@ export async function POST(req: NextRequest) {
 		const searchParams: ExaSearchParams = {
 			query,
 			type: settings.EXA_SEARCH_TYPE || 'keyword', // 使用设置或默认值
-			numResults: settings.EXA_SEARCH_NUM_RESULTS || 25, // 使用设置或默认值
+			numResults: settings.EXA_SEARCH_NUM_RESULTS ? parseInt(settings.EXA_SEARCH_NUM_RESULTS) : 25, // 将字符串转换为数字
 			contents: {
 				summary: settings.EXA_SEARCH_SUMMARY !== undefined ? settings.EXA_SEARCH_SUMMARY : true,
 				text: settings.EXA_SEARCH_TEXT || false

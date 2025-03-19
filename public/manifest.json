@@ -1,5 +1,5 @@
 {
-  "identifier": "alps-exa-search",
+  "identifier": "simple-exa-search",
   "api": [
     {
       "url": "https://alps-tongyi-image-kappa.vercel.app/api/generate",
@@ -25,12 +25,18 @@
   },
   "settings": {
     "type": "object",
-    "required": ["EXA_API_KEY"],
+    "required": ["EXA_API_KEY", "PLUGIN_API_KEY"],
     "properties": {
       "EXA_API_KEY": {
         "type": "string",
         "title": "Exa API Key",
         "description": "The API key to use the Exa Search API"
+      },
+      "PLUGIN_API_KEY": {
+        "type": "string",
+        "title": "插件访问密钥",
+        "description": "输入访问密钥以验证请求（必须与服务器配置匹配）",
+        "default": ""
       },
       "EXA_SEARCH_TYPE": {
         "type": "string",
@@ -40,12 +46,11 @@
         "default": "keyword"
       },
       "EXA_SEARCH_NUM_RESULTS": {
-        "type": "integer",
+        "type": "string",
         "title": "结果数量",
         "description": "返回的搜索结果数量（1-100）",
-        "default": 25,
-        "minimum": 1,
-        "maximum": 100
+        "default": "25",
+        "enum": ["5", "10","15", "20", "25", "50", "75", "100"]
       },
       "EXA_SEARCH_SUMMARY": {
         "type": "boolean",
