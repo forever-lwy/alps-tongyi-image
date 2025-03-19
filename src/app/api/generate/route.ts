@@ -24,9 +24,9 @@ export async function POST(req: NextRequest) {
 		const { query } = body;
 		
 		if (!query) {
-			return createErrorResponse(PluginErrorType.InvalidRequest, {
+			return createErrorResponse(PluginErrorType.PluginSettingsInvalid, {
 				message: 'Search query is required.',
-			});
+			  });
 		}
 
 		// 构建搜索参数，从客户端设置中获取参数
