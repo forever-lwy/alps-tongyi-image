@@ -2,7 +2,7 @@
   "identifier": "alps-exa-search",
   "api": [
     {
-      "url": "https://alps-tongyi-image.vercel.app/api/generate",
+      "url": "https://alps-tongyi-image-kappa.vercel.app/api/generate",
       "name": "searchWeb",
       "description": "Search the web and extract content from results using the Exa Search API",
       "parameters": {
@@ -17,7 +17,7 @@
       }
     }
   ],
-  "gateway": "https://alps-tongyi-image.vercel.app/api/gateway",
+  "gateway": "https://alps-tongyi-image-kappa.vercel.app/api/gateway",
   "meta": {
     "avatar": "🔍",
     "description": "This plugin uses Exa Search API to search the web intelligently and extract content from results.",
