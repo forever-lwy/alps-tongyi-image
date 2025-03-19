@@ -1,40 +1,67 @@
 {
-  "identifier": "alps-tongyi-image",
+  "identifier": "alps-exa-search",
   "api": [
     {
       "url": "http://localhost:3000/api/generate",
-      "name": "generateImage",
-      "description": "Generate an image based on the given prompt using Alibaba's Tongyi Wanxiang model",
+      "name": "searchWeb",
+      "description": "Search the web and extract content from results using the Exa Search API",
       "parameters": {
         "type": "object",
         "properties": {
-          "prompt": {
+          "query": {
             "type": "string",
-            "description": "The text prompt to generate the image from"
+            "description": "The search query string"
           }
         },
-        "required": ["prompt"]
+        "required": ["query"]
       }
     }
   ],
   "gateway": "http://localhost:3000/api/gateway",
   "meta": {
-    "avatar": "🎉",
-    "description": "This plugin uses Alibaba's Tongyi Wanxiang model to generate images based on text prompts.",
-    "tags": ["image", "generator", "tongyi", "wanxiang", "alibaba"],
-    "title": "Tongyi wanxiang Image Generator"
+    "avatar": "🔍",
+    "description": "This plugin uses Exa Search API to search the web intelligently and extract content from results.",
+    "tags": ["search", "web", "content", "exa"],
+    "title": "Exa Web Search"
   },
   "settings": {
     "type": "object",
-    "required": ["ALIBABA_API_KEY"],
+    "required": ["EXA_API_KEY"],
     "properties": {
-      "ALIBABA_API_KEY": {
+      "EXA_API_KEY": {
         "type": "string",
-        "title": "Alibaba API Key",
-        "description": "The API key to use the Alibaba Tongyi Wanxiang model"
+        "title": "Exa API Key",
+        "description": "The API key to use the Exa Search API"
+      },
+      "EXA_SEARCH_TYPE": {
+        "type": "string",
+        "title": "搜索类型",
+        "description": "选择搜索类型: keyword(关键词搜索)、neural(神经搜索)或auto(自动选择)",
+        "enum": ["keyword", "neural", "auto"],
+        "default": "keyword"
+      },
+      "EXA_SEARCH_NUM_RESULTS": {
+        "type": "integer",
+        "title": "结果数量",
+        "description": "返回的搜索结果数量（1-100）",
+        "default": 25,
+        "minimum": 1,
+        "maximum": 100
+      },
+      "EXA_SEARCH_SUMMARY": {
+        "type": "boolean",
+        "title": "返回网页摘要",
+        "description": "是否返回网页摘要",
+        "default": true
+      },
+      "EXA_SEARCH_TEXT": {
+        "type": "boolean",
+        "title": "返回网页全文",
+        "description": "是否返回网页全文（可能增加响应大小）",
+        "default": false
       }
     }
   },
   "version": "1",
-  "systemRole": "This plugin uses Alibaba's Tongyi Wanxiang model to generate images based on text prompts."
+  "systemRole": "This plugin uses Exa Search API to search the web intelligently and extract content from results."
 }

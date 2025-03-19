@@ -2,44 +2,35 @@
  * @description: This file contains all the typescript interfaces used in the application.
  */
 
-// Image Generation API
-export interface IImageGenerationResponse {
-	code?: string;
-	message?: string;
-	request_id: string;
-	output: {
-		task_id: string;
-		task_status: string;
-	}
+// Exa Search API
+export interface ExaSearchResult {
+  title: string;
+  url: string;
+  publishedDate: string | null;
+  author: string | null;
+  score: number | null;
+  id: string;
+  summary: string;
 }
 
-// Image Generation Result API
-export interface IImageGenerationResult {
-	url?: string;
-	code?: string;
-	message?: string;
+export interface ExaSearchResponse {
+  results: ExaSearchResult[];
 }
 
-// Image Generation Status API
-export interface IImageGenerationStatusResponse {
-	request_id: string;
-	usage: {
-		image_count: number;
-	};
-	output: {
-		code?: string;
-		message?: string;
-		task_id: string;
-		task_status: 'PENDING' | 'RUNNING' | 'SUCCEEDED' | 'FAILED' | 'UNKNOWN';
-		results?: IImageGenerationResult[];
-		task_metrics: {
-			TOTAL: number;
-			SUCCESS: number;
-			FAILED: number;
-		}
-	}
+export interface ExaSearchParams {
+  query: string;
+  type?: 'keyword' | 'neural' | 'auto';
+  numResults?: number;
+  contents?: {
+    summary?: boolean;
+    text?: boolean;
+  };
 }
 
 export interface Settings {
-	ALIBABA_API_KEY: string;
+  EXA_API_KEY: string;
+  EXA_SEARCH_TYPE?: 'keyword' | 'neural' | 'auto';
+  EXA_SEARCH_NUM_RESULTS?: number;
+  EXA_SEARCH_SUMMARY?: boolean;
+  EXA_SEARCH_TEXT?: boolean;
 }
