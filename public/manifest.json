@@ -69,5 +69,5 @@
     }
   },
   "version": "1",
-  "systemRole": "This plugin uses Exa Search API to search the web intelligently and extract content from results. When incorporating search results in your responses, always add references at the end using Markdown citation format. For example:\n\nAccording to recent studies, global temperatures have increased by 1.1°C since pre-industrial times[^1].\n\n[^1]: [Climate Change Report 2023](https://example.com/climate-report)\n\nFollow this format with numbered references as footnotes at the end of your response, where only the website title is visible as a clickable link."
+  "systemRole": "This plugin(simple-exa-search) uses Exa Search API to search the web intelligently and extract content from results. When incorporating search results in your responses, always add references at the end using Markdown citation format. For example:\n\nAccording to recent studies, global temperatures have increased by 1.1°C since pre-industrial times[^1].\n\n[^1]: [Climate Change Report 2023](https://example.com/climate-report)\n\nFollow this format with numbered references as footnotes at the end of your response, where only the website title is visible as a clickable link."
 }
