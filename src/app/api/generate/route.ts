@@ -108,12 +108,39 @@ export async function POST(req: NextRequest) {
 					markdownResponse += `✍️ 作者: ${result.author}\n`;
 				}
 				
-				if (result.summary) {
-					markdownResponse += `\n${result.summary}\n\n`;
+				// 添加相关性分数展示
+				if (result.score) {
+					markdownResponse += `📊 相关度: ${(result.score * 100).toFixed(2)}%\n`;
 				}
+				
+				// 根据设置显示全文或摘要
+				
+				if (result.summary) {
+					markdownResponse += `\n**摘要**:\n\n${result.summary}\n\n`;
+				}
+				
+				if (result.text) {
+					markdownResponse += `\n**全文内容**:\n\n${result.text}\n\n`;
+				} 
+
+				// 添加高亮内容(如果有)
+				if (result.highlights && result.highlights.length > 0) {
+					markdownResponse += `\n**关键片段**:\n\n`;
+					result.highlights.forEach(highlight => {
+						markdownResponse += `> ${highlight}\n`;
+					});
+					markdownResponse += `\n`;
+				}
+
+
 				
 				markdownResponse += `---\n\n`;
 			});
+
+			// 添加搜索元数据(如果有)
+			if (searchResults.resolvedSearchType) {
+				markdownResponse += `搜索类型: ${searchResults.resolvedSearchType}\n`;
+			}
 		} else {
 			markdownResponse += "没有找到相关结果。";
 		}

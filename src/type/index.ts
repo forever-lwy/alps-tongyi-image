@@ -11,10 +11,30 @@ export interface ExaSearchResult {
   score: number | null;
   id: string;
   summary: string;
+  text?: string;
+  image?: string;
+  favicon?: string;
+  highlights?: string[];
+  highlightScores?: number[];
+  subpages?: ExaSearchResult[];
+  extras?: {
+    links?: any[]
+  };
 }
 
 export interface ExaSearchResponse {
   results: ExaSearchResult[];
+  requestId?: string;
+  autopromptString?: string;
+  autoDate?: string;
+  resolvedSearchType?: string;
+  searchType?: string;
+  costDollars?: {
+    total: number;
+    breakDown?: any[];
+    perRequestPrices?: any;
+    perPagePrices?: any;
+  };
 }
 
 export interface ExaSearchParams {
