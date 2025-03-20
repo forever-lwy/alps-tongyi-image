@@ -30,13 +30,15 @@
       "EXA_API_KEY": {
         "type": "string",
         "title": "Exa API Key",
-        "description": "The API key to use the Exa Search API"
+        "description": "The API key to use the Exa Search API",
+        "format": "password"
       },
       "PLUGIN_API_KEY": {
         "type": "string",
         "title": "插件访问密钥",
         "description": "输入访问密钥以验证请求（必须与服务器配置匹配）",
-        "default": ""
+        "default": "",
+        "format": "password"
       },
       "EXA_SEARCH_TYPE": {
         "type": "string",
